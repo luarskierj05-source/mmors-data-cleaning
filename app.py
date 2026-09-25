@@ -13,7 +13,6 @@ st.set_page_config(page_title="MMORS Analytics & Presentation", page_icon="🌊"
 
 EXCEL_FILE = "mmors_data.xlsx"
 
-# Standard Headers for our Data Warehouse
 TARGET_HEADERS = [
     "Station_No", "Location_Barangay", "Latitude, North (degree)", "Longitude, East (degree)",
     "Period_Year", "Date", "Time", "Dissolved Oxygen, mg/L", "PH", "Temperature °C",
@@ -149,7 +148,6 @@ if app_mode == "0. Group Presentation":
     </script>
     """
     components.html(presentation_html, height=560)
-    st.info("💡 **Presenter Tip:** Use the slides above for your intro, then switch to Module 1 for the live data demo.")
 
 # ==========================================
 # MODULE 1: DATA WAREHOUSE & EXPORT
