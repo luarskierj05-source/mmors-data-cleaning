@@ -189,16 +189,38 @@ if app_mode == "0. Group Presentation":
 
             <!-- Slide 8 -->
             <div class="slide" id="slide7" style="display:none;">
-                <h2 style="color: #38bdf8; margin-top: 0;">Live Dashboard Modules</h2>
-                <div style="font-size: 1.1rem; line-height: 1.8; color: #e2e8f0;">
-                    <p>• <b>Module 1:</b> Data Warehouse (Before/After Side-by-Side & CSV Download)</p>
-                    <p>• <b>Module 2:</b> Descriptive Analytics (Interactive Plotly Trends 2012–2018)</p>
-                    <p>• <b>Module 3:</b> DENR Compliance Report (Interactive Compliance Pie Charts)</p>
-                    <p style="color: #38bdf8; font-weight: bold; margin-top: 15px;">👉 Switch to Module 1 on the sidebar to view live demo!</p>
-                </div>
+    <h2 style="color: #38bdf8; margin-top: 0; font-size: 1.8rem;">🚀 Live MMORS Interactive Dashboard</h2>
+    <p style="color: #94a3b8; font-size: 1.05rem; margin-bottom: 20px;">Access our deployed water quality analytics application directly on Streamlit Cloud.</p>
+    
+    <!-- Link Card Container -->
+    <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border: 2px solid #38bdf8; border-radius: 16px; padding: 25px; box-shadow: 0 10px 25px rgba(56, 189, 248, 0.15); display: flex; align-items: center; justify-content: space-between; max-width: 680px; margin-top: 10px;">
+        
+        <!-- Left Side: Details & Features -->
+        <div style="flex: 1; padding-right: 20px;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                <span style="background: #38bdf822; color: #38bdf8; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; border: 1px solid #38bdf844;">LIVE STREAMLIT APP</span>
+                <span style="color: #22c55e; font-size: 0.8rem; font-weight: 600;">● Online</span>
             </div>
+            <h3 style="color: #f8fafc; margin: 0 0 6px 0; font-size: 1.3rem; font-weight: 700;">MMORS Data Preprocessing & Analytics Portal</h3>
+            <p style="color: #cbd5e1; font-size: 0.9rem; margin: 0; line-height: 1.5;">
+                • ETL Pipeline & Data Warehouse (.CSV Export)<br>
+                • Interactive Plotly Parameter Trends (2012–2018)<br>
+                • DENR Class C Compliance Evaluation Reports
+            </p>
+        </div>
+
+        <!-- Right Side: Big Action Button -->
+        <div style="text-align: center;">
+            <a href="https://mmors-data-cleaning.streamlit.app" target="_blank" style="text-decoration: none;">
+                <button style="background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%); color: #0f172a; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 14px rgba(56, 189, 248, 0.4); display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease;">
+                    <span>Open Portal</span>
+                    <span style="font-size: 1.1rem;">↗</span>
+                </button>
+            </a>
+            <span style="display: block; color: #64748b; font-size: 0.75rem; margin-top: 8px;">Click to launch in new tab</span>
         </div>
     </div>
+</div>
 
     <script>
         let cur = 0; 
