@@ -97,14 +97,21 @@ if app_mode == "0. Group Presentation":
     st.header("📽️ Project Presentation")
     
     presentation_html = """
-    <div style="background: #1e293b; color: white; padding: 40px; border-radius: 20px; height: 520px; font-family: 'Segoe UI', sans-serif; position: relative;">
-        <div id="slides">
+    <div style="background: #1e293b; color: white; padding: 30px; border-radius: 16px; font-family: 'Segoe UI', sans-serif; position: relative; min-height: 480px; box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
+        
+        <!-- Navigation Buttons at Top Right -->
+        <div style="position: absolute; top: 25px; right: 30px; z-index: 100;">
+            <button onclick="change(-1)" style="padding: 10px 18px; border-radius: 8px; cursor: pointer; background: #334155; color: #f8fafc; border: 1px solid #475569; font-weight: 600; margin-right: 8px;">◀ Prev</button>
+            <button onclick="change(1)" style="padding: 10px 18px; border-radius: 8px; cursor: pointer; background: #38bdf8; color: #0f172a; border: none; font-weight: 700;">Next ▶</button>
+        </div>
+
+        <div id="slides" style="padding-top: 10px;">
             <div class="slide" id="slide0">
-                <h1 style="color: #38bdf8; font-size: 2.5rem; margin-bottom: 10px;">MMORS Data Preprocessing</h1>
-                <p style="font-size: 1.3rem; color: #cbd5e1; margin-bottom: 20px;">Water Quality Analysis & Analytics (2012–2018)</p>
-                <div style="background: #0f172a; padding: 20px; border-radius: 10px; border-left: 4px solid #38bdf8; margin-top: 20px;">
-                    <p style="margin-bottom: 10px;"><b>👥 Group Members:</b></p>
-                    <ul style="margin-left: 20px; color: #f8fafc; line-height: 1.6;">
+                <h1 style="color: #38bdf8; font-size: 2.3rem; margin-bottom: 10px; margin-top: 0;">MMORS Data Preprocessing</h1>
+                <p style="font-size: 1.2rem; color: #cbd5e1; margin-bottom: 25px;">Water Quality Analysis & Analytics (2012–2018)</p>
+                <div style="background: #0f172a; padding: 20px; border-radius: 12px; border-left: 4px solid #38bdf8; max-width: 600px;">
+                    <p style="margin-top: 0; margin-bottom: 12px; font-size: 1.1rem;"><b>👥 Group Members:</b></p>
+                    <ul style="margin: 0; padding-left: 20px; color: #f8fafc; line-height: 1.8; font-size: 1.05rem;">
                         <li>Agustin V. Cabrera</li>
                         <li>Junralf Gedorio</li>
                         <li>Suzzette Castro</li>
@@ -113,29 +120,29 @@ if app_mode == "0. Group Presentation":
                 </div>
             </div>
             <div class="slide" id="slide1" style="display:none;">
-                <h2 style="color: #38bdf8;">Why Python & Pandas?</h2>
-                <p>1. <b>Automated ETL:</b> Handles 7 years of inconsistent multi-sheet data seamlessly.</p>
-                <p>2. <b>Regex Extraction:</b> Programmatically parses sampling dates from embedded text rows.</p>
-                <p>3. <b>Data Integrity:</b> Standardizes mixed data types into a clean warehouse repository.</p>
+                <h2 style="color: #38bdf8; margin-top: 0;">Why Python & Pandas?</h2>
+                <div style="font-size: 1.1rem; line-height: 1.8;">
+                    <p>1. <b>Automated ETL:</b> Handles 7 years of inconsistent multi-sheet data seamlessly.</p>
+                    <p>2. <b>Regex Extraction:</b> Programmatically parses sampling dates from embedded text rows.</p>
+                    <p>3. <b>Data Integrity:</b> Standardizes mixed data types into a clean warehouse repository.</p>
+                </div>
             </div>
             <div class="slide" id="slide2" style="display:none;">
-                <h2 style="color: #38bdf8;">Data Quality Issues Identified</h2>
-                <ul>
+                <h2 style="color: #38bdf8; margin-top: 0;">Data Quality Issues Identified</h2>
+                <ul style="font-size: 1.1rem; line-height: 1.8; padding-left: 20px;">
                     <li>Fragmented river worksheets and irrelevant metadata tabs.</li>
                     <li>Embedded period headers (e.g., "CY 2012 JUNE") hidden inside rows.</li>
                     <li>Non-numeric contamination in BOD and Coliform values.</li>
                 </ul>
             </div>
             <div class="slide" id="slide3" style="display:none;">
-                <h2 style="color: #38bdf8;">Live Dashboard Outcome</h2>
-                <p>• <b>Module 1:</b> Cleaned Warehouse & CSV Export functionality.</p>
-                <p>• <b>Module 2:</b> Interactive Trends & Parameter Analytics.</p>
-                <p>• <b>Module 3:</b> DENR Class C Compliance Evaluation.</p>
+                <h2 style="color: #38bdf8; margin-top: 0;">Live Dashboard Outcome</h2>
+                <div style="font-size: 1.1rem; line-height: 1.8;">
+                    <p>• <b>Module 1:</b> Cleaned Warehouse & CSV Export functionality.</p>
+                    <p>• <b>Module 2:</b> Interactive Trends & Parameter Analytics.</p>
+                    <p>• <b>Module 3:</b> DENR Class C Compliance Evaluation.</p>
+                </div>
             </div>
-        </div>
-        <div style="position: absolute; bottom: 30px; right: 40px;">
-            <button onclick="change(-1)" style="padding: 10px 20px; border-radius: 5px; cursor: pointer; background: #334155; color: white; border: none; margin-right: 5px;">Prev</button>
-            <button onclick="change(1)" style="padding: 10px 20px; border-radius: 5px; cursor: pointer; background: #38bdf8; color: black; font-weight: bold; border: none;">Next</button>
         </div>
     </div>
     <script>
@@ -147,7 +154,7 @@ if app_mode == "0. Group Presentation":
         }
     </script>
     """
-    components.html(presentation_html, height=560)
+    components.html(presentation_html, height=600)
 
 # ==========================================
 # MODULE 1: DATA WAREHOUSE & EXPORT
