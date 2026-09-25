@@ -92,21 +92,23 @@ if df is None:
     st.stop()
 
 # ==========================================
-# MODULE 0: HTML PRESENTATION
+# MODULE 0: HTML PRESENTATION (8 SLIDES WITH SLIDE NUMBER)
 # ==========================================
 if app_mode == "0. Group Presentation":
     st.header("📽️ Project Presentation")
     
     presentation_html = """
-    <div style="background: #1e293b; color: white; padding: 30px; border-radius: 16px; font-family: 'Segoe UI', sans-serif; position: relative; min-height: 480px; box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
+    <div style="background: #1e293b; color: white; padding: 35px; border-radius: 16px; font-family: 'Segoe UI', sans-serif; position: relative; min-height: 500px; box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
         
-        <!-- Navigation Buttons at Top Right -->
-        <div style="position: absolute; top: 25px; right: 30px; z-index: 100;">
-            <button onclick="change(-1)" style="padding: 10px 18px; border-radius: 8px; cursor: pointer; background: #334155; color: #f8fafc; border: 1px solid #475569; font-weight: 600; margin-right: 8px;">◀ Prev</button>
+        <!-- Navigation Buttons & Slide Counter at Top Right -->
+        <div style="position: absolute; top: 25px; right: 30px; z-index: 100; display: flex; align-items: center; gap: 12px;">
+            <span id="slideCounter" style="background: #0f172a; padding: 8px 14px; border-radius: 20px; font-weight: 600; color: #38bdf8; font-size: 0.95rem; border: 1px solid #334155;">Slide 1 of 8</span>
+            <button onclick="change(-1)" style="padding: 10px 18px; border-radius: 8px; cursor: pointer; background: #334155; color: #f8fafc; border: 1px solid #475569; font-weight: 600;">◀ Prev</button>
             <button onclick="change(1)" style="padding: 10px 18px; border-radius: 8px; cursor: pointer; background: #38bdf8; color: #0f172a; border: none; font-weight: 700;">Next ▶</button>
         </div>
 
         <div id="slides" style="padding-top: 10px;">
+            <!-- Slide 1 -->
             <div class="slide" id="slide0">
                 <h1 style="color: #38bdf8; font-size: 2.3rem; margin-bottom: 10px; margin-top: 0;">MMORS Data Preprocessing</h1>
                 <p style="font-size: 1.2rem; color: #cbd5e1; margin-bottom: 25px;">Water Quality Analysis & Analytics (2012–2018)</p>
@@ -120,38 +122,94 @@ if app_mode == "0. Group Presentation":
                     </ul>
                 </div>
             </div>
+
+            <!-- Slide 2 -->
             <div class="slide" id="slide1" style="display:none;">
-                <h2 style="color: #38bdf8; margin-top: 0;">Why Python & Pandas?</h2>
-                <div style="font-size: 1.1rem; line-height: 1.8;">
-                    <p>1. <b>Automated ETL:</b> Handles 7 years of inconsistent multi-sheet data seamlessly.</p>
-                    <p>2. <b>Regex Extraction:</b> Programmatically parses sampling dates from embedded text rows.</p>
-                    <p>3. <b>Data Integrity:</b> Standardizes mixed data types into a clean warehouse repository.</p>
+                <h2 style="color: #38bdf8; margin-top: 0;">Project Background & Context</h2>
+                <div style="font-size: 1.1rem; line-height: 1.8; color: #e2e8f0;">
+                    <p>• <b>Scope:</b> Meycauayan-Marilao-Obando River System (MMORS) Water Quality Data.</p>
+                    <p>• <b>Time Horizon:</b> Multi-year monitoring dataset spanning from <b>2012 to 2018</b>.</p>
+                    <p>• <b>Objective:</b> Clean, standardize, and build an automated analytics engine to assess river water safety against national DENR standards.</p>
                 </div>
             </div>
+
+            <!-- Slide 3 -->
             <div class="slide" id="slide2" style="display:none;">
-                <h2 style="color: #38bdf8; margin-top: 0;">Data Quality Issues Identified</h2>
-                <ul style="font-size: 1.1rem; line-height: 1.8; padding-left: 20px;">
-                    <li>Fragmented river worksheets and irrelevant metadata tabs.</li>
-                    <li>Embedded period headers (e.g., "CY 2012 JUNE") hidden inside rows.</li>
-                    <li>Non-numeric contamination in BOD and Coliform values.</li>
+                <h2 style="color: #38bdf8; margin-top: 0;">Data Quality & Structure Issues</h2>
+                <ul style="font-size: 1.1rem; line-height: 1.8; padding-left: 20px; color: #e2e8f0;">
+                    <li><b>Fragmented Worksheets:</b> Data separated across multiple Excel tabs and river sub-tables.</li>
+                    <li><b>Embedded Row Headers:</b> Period indicators (e.g., "CY 2012 JUNE") hidden inside data rows.</li>
+                    <li><b>Inconsistent Schema:</b> Varying column positions, merged cells, and non-standard field names.</li>
+                    <li><b>Dirty Values:</b> Mixed text and non-numeric contamination in parameter columns.</li>
                 </ul>
             </div>
+
+            <!-- Slide 4 -->
             <div class="slide" id="slide3" style="display:none;">
-                <h2 style="color: #38bdf8; margin-top: 0;">Live Dashboard Outcome</h2>
-                <div style="font-size: 1.1rem; line-height: 1.8;">
-                    <p>• <b>Module 1:</b> Cleaned Warehouse & CSV Export functionality.</p>
-                    <p>• <b>Module 2:</b> Interactive Trends & Parameter Analytics.</p>
-                    <p>• <b>Module 3:</b> DENR Class C Compliance Evaluation.</p>
+                <h2 style="color: #38bdf8; margin-top: 0;">Why Python & Pandas ETL?</h2>
+                <div style="font-size: 1.1rem; line-height: 1.8; color: #e2e8f0;">
+                    <p>1. <b>Automated Ingestion:</b> Iterates through all sheets without manual copying.</p>
+                    <p>2. <b>Regex Date Parsing:</b> Automatically extracts sampling periods from embedded text.</p>
+                    <p>3. <b>Schema Standardization:</b> Maps messy columns to a clean 19-header target schema.</p>
+                    <p>4. <b>Data Type Coercion:</b> Safely cleans non-numeric values for calculation.</p>
+                </div>
+            </div>
+
+            <!-- Slide 5 -->
+            <div class="slide" id="slide4" style="display:none;">
+                <h2 style="color: #38bdf8; margin-top: 0;">Data Transformation Workflow</h2>
+                <div style="background: #0f172a; padding: 20px; border-radius: 12px; font-size: 1.05rem; line-height: 1.8;">
+                    <p style="margin: 0 0 10px 0;"><b>Step 1:</b> Scan and identify valid monitoring data sheets.</p>
+                    <p style="margin: 0 0 10px 0;"><b>Step 2:</b> Parse and carry down sampling period context (e.g., CY 2012).</p>
+                    <p style="margin: 0 0 10px 0;"><b>Step 3:</b> Align coordinates, barangay locations, and physical/chemical parameters.</p>
+                    <p style="margin: 0;"><b>Step 4:</b> Export clean dataset to structured Data Warehouse (.CSV).</p>
+                </div>
+            </div>
+
+            <!-- Slide 6 -->
+            <div class="slide" id="slide5" style="display:none;">
+                <h2 style="color: #38bdf8; margin-top: 0;">Key Environmental Parameters Analyzed</h2>
+                <ul style="font-size: 1.1rem; line-height: 1.8; padding-left: 20px; color: #e2e8f0;">
+                    <li><b>Dissolved Oxygen (DO):</b> Vital for aquatic life survival.</li>
+                    <li><b>Biochemical Oxygen Demand (BOD):</b> Indicates organic pollution level.</li>
+                    <li><b>pH Level:</b> Measures water acidity/alkalinity balance.</li>
+                    <li><b>Coliform Count:</b> Indicates bacterial contamination levels.</li>
+                </ul>
+            </div>
+
+            <!-- Slide 7 -->
+            <div class="slide" id="slide6" style="display:none;">
+                <h2 style="color: #38bdf8; margin-top: 0;">DENR Class C Compliance Standards</h2>
+                <div style="font-size: 1.1rem; line-height: 1.8; color: #e2e8f0;">
+                    <p>• <b>Class C Water Purpose:</b> Fishery, Recreation, & Industrial Water Supply Class II.</p>
+                    <p>• <b>Dissolved Oxygen Standard:</b> Must be <b>≥ 5.0 mg/L</b> (Compliant if high).</p>
+                    <p>• <b>BOD Standard:</b> Must be <b>≤ 7.0 mg/L</b> (Compliant if low).</p>
+                </div>
+            </div>
+
+            <!-- Slide 8 -->
+            <div class="slide" id="slide7" style="display:none;">
+                <h2 style="color: #38bdf8; margin-top: 0;">Live Dashboard Modules</h2>
+                <div style="font-size: 1.1rem; line-height: 1.8; color: #e2e8f0;">
+                    <p>• <b>Module 1:</b> Data Warehouse (Before/After Side-by-Side & CSV Download)</p>
+                    <p>• <b>Module 2:</b> Descriptive Analytics (Interactive Plotly Trends 2012–2018)</p>
+                    <p>• <b>Module 3:</b> DENR Compliance Report (Interactive Compliance Pie Charts)</p>
+                    <p style="color: #38bdf8; font-weight: bold; margin-top: 15px;">👉 Switch to Module 1 on the sidebar to view live demo!</p>
                 </div>
             </div>
         </div>
     </div>
+
     <script>
-        let cur = 0; const s = document.querySelectorAll('.slide');
+        let cur = 0; 
+        const s = document.querySelectorAll('.slide');
+        const counter = document.getElementById('slideCounter');
+        
         function change(n) {
             s[cur].style.display = 'none';
             cur = (cur + n + s.length) % s.length;
             s[cur].style.display = 'block';
+            counter.innerText = 'Slide ' + (cur + 1) + ' of ' + s.length;
         }
     </script>
     """
@@ -170,7 +228,6 @@ elif app_mode == "1. Data Warehouse & Pre-Processing":
         st.subheader("🔴 BEFORE: Raw Excel Sheet")
         st.warning("Issues: Unstructured headers, embedded period rows, merged cells, and multiple tabs.")
         
-        # Display image if present, else fallback
         if os.path.exists(RAW_IMAGE_FILE):
             st.image(RAW_IMAGE_FILE, caption="Uncleaned DENR EMB Water Quality Excel File", use_container_width=True)
         else:
