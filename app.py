@@ -12,7 +12,7 @@ import re
 st.set_page_config(page_title="MMORS Analytics & Presentation", page_icon="🌊", layout="wide")
 
 EXCEL_FILE = "mmors_data.xlsx"
-RAW_IMAGE_FILE = "raw_excel_sample.png"  # Siguraduhing i-upload ang larawan sa GitHub sa ganitong pangalan
+RAW_IMAGE_FILE = "raw_excel_sample.png"
 
 TARGET_HEADERS = [
     "Station_No", "Location_Barangay", "Latitude, North (degree)", "Longitude, East (degree)",
@@ -172,7 +172,7 @@ elif app_mode == "1. Data Warehouse & Pre-Processing":
         
         # Display image if present, else fallback
         if os.path.exists(RAW_IMAGE_FILE):
-            st.image(RAW_IMAGE_FILE, caption="Uncleaned DENR EMB Water Quality Excel File", use_column_width=True)
+            st.image(RAW_IMAGE_FILE, caption="Uncleaned DENR EMB Water Quality Excel File", use_container_width=True)
         else:
             st.info(f"Pakisave ang screenshot bilang `{RAW_IMAGE_FILE}` sa iyong GitHub repository para lumabas ang larawan dito.")
 
