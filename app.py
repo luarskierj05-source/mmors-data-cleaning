@@ -28,7 +28,7 @@ MONTH_MAP = {
 }
 
 # ==========================================
-# 2. ETL ENGINE (The "Framework")
+# 2. ETL ENGINE
 # ==========================================
 @st.cache_data
 def load_and_transform_data(file_name):
@@ -49,11 +49,9 @@ def load_and_transform_data(file_name):
                         current_period = p_match.group(1).upper()
                         continue
                     
-                    # Detect valid station rows
                     c0, c1 = str(row.iloc[0]).strip(), str(row.iloc[1]).strip()
                     if c0 in ['1','2','3','4','5'] or c1 in ['1','2','3','4','5']:
                         row_list = list(row.values)
-                        # Normalize column shifts
                         if c0 in ['1','2','3','4','5']:
                             rec = [c0, row_list[1], row_list[2], row_list[3], current_period] + row_list[4:]
                         else:
@@ -62,7 +60,6 @@ def load_and_transform_data(file_name):
 
         unified_df = pd.DataFrame(all_data, columns=TARGET_HEADERS)
         
-        # Data Cleaning & Type Casting
         unified_df['Year_Only'] = unified_df['Period_Year'].astype(str).str.extract(r'(\d{4})')[0]
         unified_df['Month_Num'] = unified_df['Period_Year'].apply(lambda x: next((v for k,v in MONTH_MAP.items() if k in str(x).upper()), 1))
         unified_df['Period_Order'] = pd.to_numeric(unified_df['Year_Only'], errors='coerce').fillna(0).astype(int)*100 + unified_df['Month_Num']
@@ -70,7 +67,6 @@ def load_and_transform_data(file_name):
         num_cols = ["Dissolved Oxygen, mg/L", "Biochemical Oxygen Demand, mg/L", "PH", "Fecal Coliform, MPN/100mL"]
         for col in num_cols: unified_df[col] = pd.to_numeric(unified_df[col], errors='coerce')
         
-        # Add Compliance Flags (DENR Class C)
         unified_df['DO_Compliance'] = np.where(unified_df['Dissolved Oxygen, mg/L'] >= 5.0, 'Compliant', 'Non-Compliant')
         unified_df['BOD_Compliance'] = np.where(unified_df['Biochemical Oxygen Demand, mg/L'] <= 7.0, 'Compliant', 'Non-Compliant')
         
@@ -96,31 +92,38 @@ if df is None:
     st.stop()
 
 # ==========================================
-# MODULE 0: HTML PRESENTATION (English)
+# MODULE 0: HTML PRESENTATION
 # ==========================================
 if app_mode == "0. Group Presentation":
     st.header("📽️ Project Presentation")
     
     presentation_html = """
-    <div style="background: #1e293b; color: white; padding: 40px; border-radius: 20px; height: 500px; font-family: 'Segoe UI'; position: relative;">
+    <div style="background: #1e293b; color: white; padding: 40px; border-radius: 20px; height: 520px; font-family: 'Segoe UI', sans-serif; position: relative;">
         <div id="slides">
             <div class="slide" id="slide0">
-                <h1 style="color: #38bdf8; font-size: 3rem;">MMORS Data Preprocessing</h1>
-                <p style="font-size: 1.5rem;">Water Quality Analysis (2012-2018)</p>
-                <p><b>Tool:</b> Python (Pandas) & Streamlit Dashboard</p>
-                <p><i>Group Activity Presentation</i></p>
+                <h1 style="color: #38bdf8; font-size: 2.5rem; margin-bottom: 10px;">MMORS Data Preprocessing</h1>
+                <p style="font-size: 1.3rem; color: #cbd5e1; margin-bottom: 20px;">Water Quality Analysis & Analytics (2012–2018)</p>
+                <div style="background: #0f172a; padding: 20px; border-radius: 10px; border-left: 4px solid #38bdf8; margin-top: 20px;">
+                    <p style="margin-bottom: 10px;"><b>👥 Group Members:</b></p>
+                    <ul style="margin-left: 20px; color: #f8fafc; line-height: 1.6;">
+                        <li>Agustin V. Cabrera</li>
+                        <li>Junralf Gedorio</li>
+                        <li>Suzzette Castro</li>
+                        <li>Roselyn Luar</li>
+                    </ul>
+                </div>
             </div>
             <div class="slide" id="slide1" style="display:none;">
                 <h2 style="color: #38bdf8;">Why Python & Pandas?</h2>
-                <p>1. <b>Automated ETL:</b> Handles 7 years of inconsistent multi-sheet data.</p>
-                <p>2. <b>Regex Extraction:</b> Programmatically parses sampling dates from text rows.</p>
-                <p>3. <b>Data Integrity:</b> Standardizes mixed data types into a clean warehouse.</p>
+                <p>1. <b>Automated ETL:</b> Handles 7 years of inconsistent multi-sheet data seamlessly.</p>
+                <p>2. <b>Regex Extraction:</b> Programmatically parses sampling dates from embedded text rows.</p>
+                <p>3. <b>Data Integrity:</b> Standardizes mixed data types into a clean warehouse repository.</p>
             </div>
             <div class="slide" id="slide2" style="display:none;">
                 <h2 style="color: #38bdf8;">Data Quality Issues Identified</h2>
                 <ul>
                     <li>Fragmented river worksheets and irrelevant metadata tabs.</li>
-                    <li>Embedded period headers (e.g., "CY 2012 JUNE") hidden in rows.</li>
+                    <li>Embedded period headers (e.g., "CY 2012 JUNE") hidden inside rows.</li>
                     <li>Non-numeric contamination in BOD and Coliform values.</li>
                 </ul>
             </div>
@@ -132,8 +135,8 @@ if app_mode == "0. Group Presentation":
             </div>
         </div>
         <div style="position: absolute; bottom: 30px; right: 40px;">
-            <button onclick="change(-1)" style="padding: 10px 20px; border-radius: 5px; cursor: pointer;">Prev</button>
-            <button onclick="change(1)" style="padding: 10px 20px; border-radius: 5px; cursor: pointer; background: #38bdf8; border: none;">Next</button>
+            <button onclick="change(-1)" style="padding: 10px 20px; border-radius: 5px; cursor: pointer; background: #334155; color: white; border: none; margin-right: 5px;">Prev</button>
+            <button onclick="change(1)" style="padding: 10px 20px; border-radius: 5px; cursor: pointer; background: #38bdf8; color: black; font-weight: bold; border: none;">Next</button>
         </div>
     </div>
     <script>
@@ -145,7 +148,7 @@ if app_mode == "0. Group Presentation":
         }
     </script>
     """
-    components.html(presentation_html, height=550)
+    components.html(presentation_html, height=560)
     st.info("💡 **Presenter Tip:** Use the slides above for your intro, then switch to Module 1 for the live data demo.")
 
 # ==========================================
@@ -155,7 +158,6 @@ elif app_mode == "1. Data Warehouse & Pre-Processing":
     st.header("🛠️ Cleaned Data Warehouse")
     st.dataframe(df.drop(columns=['Period_Order']), use_container_width=True)
     
-    # REQUIREMENT: Final Dataset Export Button
     csv = df.to_csv(index=False).encode('utf-8')
     st.download_button(
         label="📥 Download Cleaned Dataset (.CSV)",
