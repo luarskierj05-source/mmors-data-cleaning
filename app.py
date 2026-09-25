@@ -98,7 +98,7 @@ if df is None:
 # ==========================================
 # MODULE 0: HTML PRESENTATION (English)
 # ==========================================
-if app_mode == "0. English Presentation Slides":
+if app_mode == "0. Group Presentation":
     st.header("📽️ Project Presentation")
     
     presentation_html = """
