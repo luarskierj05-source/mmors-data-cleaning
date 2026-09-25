@@ -85,7 +85,7 @@ df, err = load_and_transform_data(EXCEL_FILE)
 # ==========================================
 st.sidebar.title("🌊 MMORS Portal")
 app_mode = st.sidebar.radio("Navigate to:", [
-    "0. English Presentation Slides", 
+    "0. Group Presentation", 
     "1. Data Warehouse & Pre-Processing", 
     "2. Descriptive Analytics", 
     "3. DENR Compliance Report"
