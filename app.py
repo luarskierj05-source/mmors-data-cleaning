@@ -12,6 +12,7 @@ import re
 st.set_page_config(page_title="MMORS Analytics & Presentation", page_icon="🌊", layout="wide")
 
 EXCEL_FILE = "mmors_data.xlsx"
+RAW_IMAGE_FILE = "raw_excel_sample.png"  # Siguraduhing i-upload ang larawan sa GitHub sa ganitong pangalan
 
 TARGET_HEADERS = [
     "Station_No", "Location_Barangay", "Latitude, North (degree)", "Longitude, East (degree)",
@@ -25,19 +26,6 @@ MONTH_MAP = {
     'JANUARY': 1, 'FEBRUARY': 2, 'MARCH': 3, 'APRIL': 4, 'MAY': 5, 'JUNE': 6,
     'JULY': 7, 'AUGUST': 8, 'SEPTEMBER': 9, 'OCTOBER': 10, 'NOVEMBER': 11, 'DECEMBER': 12
 }
-
-# Helper function to read raw sample sheet for "Before" view
-@st.cache_data
-def load_raw_sample(file_name):
-    if not os.path.exists(file_name):
-        return None
-    try:
-        xls = pd.ExcelFile(file_name)
-        # Read the first sheet as-is (uncleaned raw data)
-        raw_df = pd.read_excel(file_name, sheet_name=xls.sheet_names[0], header=None)
-        return raw_df
-    except Exception:
-        return None
 
 # ==========================================
 # 2. ETL ENGINE
@@ -87,7 +75,6 @@ def load_and_transform_data(file_name):
         return None, str(e)
 
 df, err = load_and_transform_data(EXCEL_FILE)
-df_raw_sample = load_raw_sample(EXCEL_FILE)
 
 # ==========================================
 # 3. NAVIGATION & SIDEBAR
@@ -171,7 +158,7 @@ if app_mode == "0. Group Presentation":
     components.html(presentation_html, height=600)
 
 # ==========================================
-# MODULE 1: DATA WAREHOUSE & EXPORT (SIDE-BY-SIDE VIEW)
+# MODULE 1: DATA WAREHOUSE & EXPORT (IMAGE SIDE-BY-SIDE VIEW)
 # ==========================================
 elif app_mode == "1. Data Warehouse & Pre-Processing":
     st.header("🛠️ Data Pre-Processing Transformation")
@@ -180,12 +167,14 @@ elif app_mode == "1. Data Warehouse & Pre-Processing":
     col_before, col_after = st.columns(2)
 
     with col_before:
-        st.subheader("🔴 BEFORE: Raw Excel Data")
-        st.warning("Issues: Unstructured headers, embedded period rows, column shifts, missing schema.")
-        if df_raw_sample is not None:
-            st.dataframe(df_raw_sample.head(25), use_container_width=True, height=450)
+        st.subheader("🔴 BEFORE: Raw Excel Sheet")
+        st.warning("Issues: Unstructured headers, embedded period rows, merged cells, and multiple tabs.")
+        
+        # Display image if present, else fallback
+        if os.path.exists(RAW_IMAGE_FILE):
+            st.image(RAW_IMAGE_FILE, caption="Uncleaned DENR EMB Water Quality Excel File", use_column_width=True)
         else:
-            st.info("Raw data preview unavailable.")
+            st.info(f"Pakisave ang screenshot bilang `{RAW_IMAGE_FILE}` sa iyong GitHub repository para lumabas ang larawan dito.")
 
     with col_after:
         st.subheader("🟢 AFTER: Cleaned Data Warehouse")
